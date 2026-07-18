@@ -1,0 +1,194 @@
+#########################################
+# Unity
+#########################################
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+UserSettings/
+
+# Asset Import Pipeline
+Assets/AssetStoreTools*
+
+#########################################
+# Unity Generated Files
+#########################################
+
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+#########################################
+# Visual Studio
+#########################################
+
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svclog
+*.cache
+*.tmp
+*.log
+*.obj
+*.ilk
+*.pdb
+*.ipch
+
+#########################################
+# VS Code
+#########################################
+
+.vscode/
+*.code-workspace
+
+#########################################
+# JetBrains Rider / IntelliJ
+#########################################
+
+.idea/
+.fleet/
+
+*.sln.iml
+*.DotSettings.user
+
+#########################################
+# MonoDevelop
+#########################################
+
+*.userprefs
+
+#########################################
+# Visual Studio for Mac
+#########################################
+
+*.pidb
+*.userprefs
+
+#########################################
+# Build Artifacts
+#########################################
+
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.ipa
+
+#########################################
+# Logs
+#########################################
+
+*.log
+*.stacktrace
+
+#########################################
+# Crash Dumps
+#########################################
+
+sysinfo.txt
+crashlytics-build.properties
+
+#########################################
+# Addressables
+#########################################
+
+ServerData/
+
+#########################################
+# OS Files
+#########################################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+#########################################
+# Archives
+#########################################
+
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+#########################################
+# Temporary
+#########################################
+
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.rej
+*.swp
+*.swo
+
+#########################################
+# Package Managers
+#########################################
+
+node_modules/
+
+#########################################
+# IDE Generated
+#########################################
+
+.history/
+.cache/
+.gradle/
+.settings/
+
+#########################################
+# Profilers
+#########################################
+
+*.psess
+*.vsp
+*.vspx
+
+#########################################
+# Coverage
+#########################################
+
+.coverage
+coverage/
+
+#########################################
+# Keep these tracked
+#########################################
+
+!Assets/
+!Packages/
+!ProjectSettings/
+!ProjectSettings/**
+!Packages/packages-lock.json
+!Packages/manifest.json
