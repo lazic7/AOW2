@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class UnitSpawner : MonoBehaviour
 {
@@ -8,10 +9,14 @@ public class UnitSpawner : MonoBehaviour
     [Header("Spawn position")]
     [SerializeField] private Transform spawnPoint;
 
+    [Header("Spawn limit")]
+    [SerializeField] private int maxActiveUnits = 10;
+
     [Header("Cooldown")]
     [SerializeField] private float spawnCooldown = 1f;
 
     private float _nextSpawnTime;
+    private readonly List<GameObject> _spawnedUnits = new();
 
     private void Awake()
     {
@@ -33,11 +38,30 @@ public class UnitSpawner : MonoBehaviour
             return;
         }
 
+        RemoveDestroyedUnits();
+
+        if (_spawnedUnits.Count >= maxActiveUnits)
+        {
+            return;
+        }
+
         int randomIndex = Random.Range(0, unitPrefabs.Length);
         GameObject selectedUnit = unitPrefabs[randomIndex];
 
-        Instantiate(selectedUnit, spawnPoint.position, Quaternion.identity);
+        GameObject spawnedUnit = Instantiate(selectedUnit, spawnPoint.position, Quaternion.identity);
+        _spawnedUnits.Add(spawnedUnit);
         _nextSpawnTime += spawnCooldown;
+    }
+
+    private void RemoveDestroyedUnits()
+    {
+        for (int i = _spawnedUnits.Count - 1; i >= 0; i--)
+        {
+            if (_spawnedUnits[i] == null)
+            {
+                _spawnedUnits.RemoveAt(i);
+            }
+        }
     }
 
     private bool IsConfigured()
@@ -57,6 +81,12 @@ public class UnitSpawner : MonoBehaviour
         if (spawnCooldown <= 0f)
         {
             Debug.LogWarning("Spawn cooldown mora biti veci od 0.");
+            return false;
+        }
+
+        if (maxActiveUnits <= 0)
+        {
+            Debug.LogWarning("Max active units mora biti veci od 0.");
             return false;
         }
 
