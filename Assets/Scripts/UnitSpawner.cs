@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class UnitSpawner : MonoBehaviour
@@ -12,43 +11,55 @@ public class UnitSpawner : MonoBehaviour
     [Header("Cooldown")]
     [SerializeField] private float spawnCooldown = 1f;
 
-    private void Start()
-    {
-        StartCoroutine(SpawnUnitsAutomatically());
-    }
+    private float _nextSpawnTime;
 
-    private IEnumerator SpawnUnitsAutomatically()
+    private void Awake()
     {
-        while (true)
+        if (!IsConfigured())
         {
-            SpawnRandomUnit();
-
-            yield return new WaitForSeconds(spawnCooldown);
+            enabled = false;
         }
     }
 
-    private void SpawnRandomUnit()
+    private void OnEnable()
+    {
+        _nextSpawnTime = Time.time + spawnCooldown;
+    }
+
+    private void Update()
+    {
+        if (Time.time < _nextSpawnTime)
+        {
+            return;
+        }
+
+        int randomIndex = Random.Range(0, unitPrefabs.Length);
+        GameObject selectedUnit = unitPrefabs[randomIndex];
+
+        Instantiate(selectedUnit, spawnPoint.position, Quaternion.identity);
+        _nextSpawnTime += spawnCooldown;
+    }
+
+    private bool IsConfigured()
     {
         if (unitPrefabs == null || unitPrefabs.Length == 0)
         {
             Debug.LogWarning("Unit prefabi nisu dodani u UnitSpawner.");
-            return;
+            return false;
         }
 
         if (spawnPoint == null)
         {
             Debug.LogWarning("SpawnPoint nije postavljen.");
-            return;
+            return false;
         }
 
-        int randomIndex = Random.Range(0, unitPrefabs.Length);
+        if (spawnCooldown <= 0f)
+        {
+            Debug.LogWarning("Spawn cooldown mora biti veci od 0.");
+            return false;
+        }
 
-        GameObject selectedUnit = unitPrefabs[randomIndex];
-
-        Instantiate(
-            selectedUnit,
-            spawnPoint.position,
-            Quaternion.identity
-        );
+        return true;
     }
 }
